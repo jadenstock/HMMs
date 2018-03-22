@@ -22,6 +22,6 @@ class HMM():
 		"""implementation of the Baum-Weltch or Forward-Backward algorithm for inference of the transition probabilities"""
 		return 0
 
-if __name__ == '__main__':
-	coin = HMM({1:{1:.8, 2:.2}, 2:{1:.5, 2:.5}}, {1:{1:.5, 2:.5}, 2:{1:.9, 2:.1}})
-	print(coin.likelihood([1,2,1,2,2,1,2,2,1,1,2,1,2,2,1,2,1,2,1,1,1]))
+#if __name__ == '__main__':
+#	coin = HMM({1:{1:.8, 2:.2}, 2:{1:.5, 2:.5}}, {1:{1:.5, 2:.5}, 2:{1:.9, 2:.1}})
+#	print(coin.likelihood([1,2,1,2,2,1,2,2,1,1,2,1,2,2,1,2,1,2,1,1,1]))
