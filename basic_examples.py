@@ -2,15 +2,8 @@ from HMM import *
 import numpy as np
 
 if __name__ == "__main__":
-	coin_transition = {1:{1:.8, 2:.2}, 2:{1:.5, 2:.5}}
-	coin_emission = {1:{1:.5, 2:.5}, 2:{1:.9, 2:.1}}
-	coin_initial = {1:.5, 2:.5}
-	coin = HMM(coin_transition, coin_emission, coin_initial)
 
-	#print(coin.likelihood([1,2,1,2,2,1,2,2,1,1,2,1,2,2,1,2,1,2,1,1,1]))
-	#print(coin.viterbi([1,2,1,2,2,1,2,2,1,1,2,1,2,2,1,2,1,2,1,1,1]))
-
-	### example from wikipedia
+	### example from wikipedia: https://en.wikipedia.org/wiki/Viterbi_algorithm#Example
 	health_transition = {
 		'Healthy' : {'Healthy': 0.7, 'Fever': 0.3},
 		'Fever' : {'Healthy': 0.4, 'Fever': 0.6}
@@ -21,8 +14,23 @@ if __name__ == "__main__":
 	}
 	health_initial = {'Healthy': 0.6, 'Fever': 0.4}
 
-	Health = HMM(health_transition, health_emission, health_initial)
+	Health = HMM(health_initial, health_transition, health_emission)
+	likelihood = []
 
-	prob = []
-	print(Health.viterbi(['normal', 'cold', 'dizzy'], likelihood=prob))
-	print(np.exp(prob[0]))
+	#print("the most likely hidden state sequence: {}".format(
+	#	Health.viterbi(['normal', 'cold', 'dizzy'], likelihood=likelihood)))
+	#print("That sequence has a probability {}".format(likelihood[0]))
+	
+	### example from wikipedia for the Baum-Welch algorithm: https://en.wikipedia.org/wiki/Baum%E2%80%93Welch_algorithm#Example
+	chicken_transition = {
+		1 : {1 : 0.5, 2 : 0.5},
+		2 : {1 : 0.3, 2 : 0.7}
+	}
+	chicken_emission = {
+		1 : {'N' : 0.3, 'E' : 0.7},
+		2 : {'N' : 0.8, 'E' : 0.2}
+	}
+	chicken_initial = {1:0.2, 2:0.8}
+
+	Chicken = HMM(chicken_initial, chicken_transition, chicken_emission)
+	Chicken.baum_welch('NN')
